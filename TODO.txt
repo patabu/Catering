@@ -1,0 +1,5 @@
+
+CHEF: /chef/add, /chef/form, /chef/get/all, /chef/get/{id}, /chef/delete/{id}
+BUFFET: 
+PIATTO
+INGREDIENTE

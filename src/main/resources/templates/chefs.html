@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Elenco</title>
+</head>
+<body>
+    <h4>Elenco chef</h4>
+    <ul>
+        <li th:each="chef : ${chefs}">
+            <a href="chef.html" th:href="@{'/chef/get/' + ${chef.id}}"
+                th:text="${chef.nome} + ' ' + ${chef.cognome} + ' ' + ${chef.nazionalita}">Mario Rossi Italia</a>
+        </li>
+    </ul>
+</body>
+</html>

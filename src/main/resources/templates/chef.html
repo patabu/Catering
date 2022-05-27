@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Chef</title>
+</head>
+<body>
+    <h1>Dettagli sullo chef</h1>
+    <div th:if="${chef}">
+        <span th:text="${chef.nome}">Paolo</span>
+        <span th:text="${chef.cognome}">Rossi</span>
+        <span th:text="${chef.nazionalita}">Italia</span>
+        <form th:action="@{'/chef/delete/' + ${chef.id}}" method="post" th:object="${chef}">
+            <span><button type="submit">Elimina</button></span>
+        </form>
+        <form th:action="@{'/chef/modify/' + ${chef.id} + '/form'}" method="get" th:object="${chef}">
+            <span><button type="submit">Modifica</button></span>
+        </form>
+    </div>
+    <footer><a href="/">Home</a></footer>
+</body>
+</html>
