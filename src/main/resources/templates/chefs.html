@@ -5,12 +5,18 @@
     <title>Elenco</title>
 </head>
 <body>
-    <h4>Elenco chef</h4>
-    <ul>
-        <li th:each="chef : ${chefs}">
-            <a href="chef.html" th:href="@{'/chef/get/' + ${chef.id}}"
-                th:text="${chef.nome} + ' ' + ${chef.cognome} + ' ' + ${chef.nazionalita}">Mario Rossi Italia</a>
-        </li>
-    </ul>
+    <a href="/">Home</a>
+    <div th:if="${chefs.size()}">
+        <h1>Elenco chef</h1>
+        <ul>
+            <li th:each="chef : ${chefs}">
+                <a href="chef.html" th:href="@{'/chef/get/' + ${chef.id}}" th:text="${chef.nome} + ' ' + ${chef.cognome}">Mario Rossi</a>
+                <span th:text="'(' + ${chef.nazionalita} + ') - Piatti: ' + ${chef.piatti.size()} + ' - Buffet:' + ${chef.buffets.size()}"> (Italia) - Piatti: 5 - Buffet: 2</span>
+            </li>
+        </ul>
+    </div>
+    <div th:if="!${chefs.size()}">
+        <h2>Non sono presenti chef</h2>
+    </div>
 </body>
 </html>

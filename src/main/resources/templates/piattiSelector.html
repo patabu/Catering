@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select</title>
+</head>
+<body>
+    <a href="/">Home</a>
+    <h1>Seleziona i piatti da aggiungere</h1>
+    <form th:action="@{'/buffet/' + *{buffetId} + '/add/piatti'}" method="post" th:object="${piattiSelectorDTO}">
+        <input type="hidden" th:field="*{buffetId}">
+        <input type="hidden" th:field="*{piatti}">
+        <div>
+            <ul>
+                <li th:each="piatto : *{piatti}">
+                    <input type="checkbox" th:field="*{piattiSelected}" th:value="${piatto.id}">
+                    <label th:text="${piatto.nome}">Nome piatto</label>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <span><button type="submit">Aggiungi</button></span>
+          </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ingrediente</title>
+</head>
+<body>
+    <a href="/">Home</a>
+    <h1>Dettagli sull'ingrediente</h1>
+    <div th:if="${ingrediente}">
+        <p th:text="'Nome: ' + ${ingrediente.nome}">Nome: Pasta</p>
+        <p th:text="'Origine: ' + ${ingrediente.origine}">Origine: Italia</p>
+        <p th:text="'Descrizione: ' + ${ingrediente.descrizione}">Descrizione: Rigatoni</p>
+        <h2>Utilizzato nei seguenti piatti</h2>
+        <ul>
+            <li th:each="piatto : ${ingrediente.piatti}">
+                <a href="piatto.html" th:href="@{'/piatto/get/' + ${ingrediente.piatto.id}}"
+                th:text="Piatto ${ingrediente.piatto.nome} + ' di ' + ${ingrediente.piatto.chef.nome} + ' ' + ${ingrediente.piatto.chef.cognome}">Carbonara</a>
+            </li>
+        </ul>
+        <form th:action="@{'/ingrediente/form/modify/' + ${ingrediente.id}}" method="get" th:object="${ingrediente}">
+            <span><button type="submit">Modifica</button></span>
+        </form>
+        <form th:action="@{'/ingrediente/delete/' + ${ingrediente.id}}" method="post" th:object="${ingrediente}">
+            <span><button type="submit">Elimina</button></span>
+        </form>
+    </div>
+</body>
+</html>

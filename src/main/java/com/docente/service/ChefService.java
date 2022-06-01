@@ -1,7 +1,7 @@
 package com.docente.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -17,8 +17,8 @@ public class ChefService {
 
 	@Autowired private ChefRepository chefRepository;
 
-	public List<Chef> getAllChefs() {
-		List<Chef> chefs = new ArrayList<Chef>();
+	public Set<Chef> getAllChefs() {
+		Set<Chef> chefs = new HashSet<Chef>();
 		for (Chef chef : chefRepository.findAll()) {
 			chefs.add(chef);
 		}
@@ -31,21 +31,10 @@ public class ChefService {
 			return chef.get();
 		return null;
 	}
-	
+		
 	@Transactional
-	public void saveChef(Chef chef) {
-		System.out.println(chef.getId());
-		if (chef.getId() == null) this.chefRepository.save(chef);
-		else {
-			Optional<Chef> chefOpt = this.chefRepository.findById(chef.getId());
-			if (chefOpt.isPresent()) {
-				Chef chefToUpdate = chefOpt.get();
-				chefToUpdate.setNome(chef.getNome());
-				chefToUpdate.setCognome(chef.getCognome());
-				chefToUpdate.setNazionalita(chef.getNazionalita());
-				this.chefRepository.save(chefToUpdate);
-			}
-		}
+	public Chef saveChef(Chef chef) {
+		return this.chefRepository.save(chef);
 	}
 	
 	public void deleteChefById(Long id) {

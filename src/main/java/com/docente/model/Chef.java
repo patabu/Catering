@@ -1,6 +1,6 @@
 package com.docente.model;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,16 +25,19 @@ public class Chef {
 	@NotBlank
 	private String nazionalita;	
 	
+	@OneToMany(mappedBy = "chef")
+	private Set<Piatto> piatti;
+	
 	//Ogni chef ha più buffet
 	@OneToMany(mappedBy = "chef")
-	private List<Buffet> buffets;
+	private Set<Buffet> buffets; 
 	
-	public Chef() {}
-
-	
+	public Chef() {
+		
+	}
 
 	public Chef(Long id, @NotBlank String nome, @NotBlank String cognome, @NotBlank String nazionalita,
-			List<Buffet> buffets) {
+			Set<Buffet> buffets) {
 		this.id = id;
 		this.nome = nome;
 		this.cognome = cognome;
@@ -76,12 +79,20 @@ public class Chef {
 		this.nazionalita = nazionalita;
 	}
 
-	public List<Buffet> getBuffets() {
+	public Set<Buffet> getBuffets() {
 		return buffets;
 	}
 
-	public void setBuffets(List<Buffet> buffets) {
+	public void setBuffets(Set<Buffet> buffets) {
 		this.buffets = buffets;
+	}
+
+	public Set<Piatto> getPiatti() {
+		return piatti;
+	}
+
+	public void setPiatti(Set<Piatto> piatti) {
+		this.piatti = piatti;
 	}
 	
 }

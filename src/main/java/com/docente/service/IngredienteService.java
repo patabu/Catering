@@ -1,7 +1,8 @@
 package com.docente.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,16 +15,28 @@ public class IngredienteService {
 
 	@Autowired private IngredienteRepository ingredienteRepository;
 	
-	public List<Ingrediente> getAllIngredienti() {
-		List<Ingrediente> ingredienti = new ArrayList<Ingrediente>();
+	public Set<Ingrediente> getAllIngredienti() {
+		Set<Ingrediente> ingredienti = new HashSet<Ingrediente>();
 		for (Ingrediente ingrediente : ingredienteRepository.findAll()) {
 			ingredienti.add(ingrediente);
 		}
 		return ingredienti;
 	}
 	
-	public void saveIngrediente(Ingrediente ingrediente) {
-		ingredienteRepository.save(ingrediente);
+	public Ingrediente saveIngrediente(Ingrediente ingrediente) {
+		return this.ingredienteRepository.save(ingrediente);
+	}
+
+	public Ingrediente getIngredienteById(Long id) {
+		Optional<Ingrediente> ingredienteOpt = this.ingredienteRepository.findById(id);
+		if (ingredienteOpt.isPresent()) {
+			return ingredienteOpt.get();
+		}
+		return null;
+	}
+
+	public void deleteIngrediente(Long id) {
+		this.ingredienteRepository.deleteById(id);
 	}
 	
 }

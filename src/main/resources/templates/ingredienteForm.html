@@ -7,15 +7,9 @@
   </head>
   <body>
     <a href="/">Home</a>
-    <h1>Operazioni</h1>
+    <h1>Ingrediente</h1>
     <div class="formprova">
-      <!--
-        th:action => specifica l'url a cui mandare la richiesta HTTP
-        th:object => specifica che i dati raccolti dalla form sono dati che comporrano un oggetto persona
-        th:field => specifica il campo dell'oggetto, in particolare l'asterisco denota che
-                    si tratta di un campo facente parte dell'oggetto definito in th:object
-      -->
-      <form th:action="@{/chef/add}" method="post" th:object="${chef}">
+      <form th:action="@{/ingrediente/add}" method="post" th:object="${ingrediente}">
         <div th:if="${#fields.hasGlobalErrors()}">
           <p th:each="err: ${#fields.globalErrors()}" th:text="${err}">...</p>
         </div>
@@ -26,14 +20,14 @@
           <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
         </div>
         <div>
-          <span>Cognome:</span>
-          <span><input type="text" th:field="*{cognome}"></span>
-          <span th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span>
+          <span>Origine:</span>
+          <span><input type="text" th:field="*{origine}"></span>
+          <span th:if="${#fields.hasErrors('origine')}" th:errors="*{origine}"></span>
         </div>
         <div>
-          <span>Nazionalità:</span>
-          <span><input type="text" th:field="*{nazionalita}"></span>
-          <span th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}"></span>
+          <span>Descrizione:</span>
+          <span><input type="text" th:field="*{descrizione}"></span>
+          <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
         <div>
           <span><button type="submit" th:if="${modifyForm}">Modifica</button></span>
           <span><button type="submit" th:if="!${modifyForm}">Aggiungi</button></span>

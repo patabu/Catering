@@ -1,6 +1,8 @@
 package com.docente.model;
 
-import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,22 +29,25 @@ public class Piatto {
 	@NotBlank
 	private String descrizione;
 	
+	@ManyToOne
+	private Chef chef;
+	
 	//Molti piatti possono essere presenti in più buffet
 	@ManyToMany
-	private List<Buffet> buffet;
+	private Set<Buffet> buffets;
 	
 	//Molti piatti possono avere gli stessi ingredienti
 	@ManyToMany(mappedBy = "piatti")
-	private List<Ingrediente> ingredienti;
+	private Set<Ingrediente> ingredienti;
 	
 	public Piatto() {}
 
-	public Piatto(Long id, @NotBlank String nome, @NotBlank String descrizione, List<Buffet> buffet,
-			List<Ingrediente> ingredienti) {
+	public Piatto(Long id, @NotBlank String nome, @NotBlank String descrizione, Set<Buffet> buffets,
+			Set<Ingrediente> ingredienti) {
 		this.id = id;
 		this.nome = nome;
 		this.descrizione = descrizione;
-		this.buffet = buffet;
+		this.buffets = buffets;
 		this.ingredienti = ingredienti;
 	}
 
@@ -70,22 +75,55 @@ public class Piatto {
 		this.descrizione = descrizione;
 	}
 
-	public List<Buffet> getBuffet() {
-		return buffet;
+	public Set<Buffet> getBuffets() {
+		return buffets;
 	}
 
-	public void setBuffet(List<Buffet> buffet) {
-		this.buffet = buffet;
+	public void setBuffets(Set<Buffet> buffets) {
+		this.buffets = buffets;
 	}
 
-	public List<Ingrediente> getIngredienti() {
+	public Set<Ingrediente> getIngredienti() {
 		return ingredienti;
 	}
 
-	public void setIngredienti(List<Ingrediente> ingredienti) {
+	public void setIngredienti(Set<Ingrediente> ingredienti) {
 		this.ingredienti = ingredienti;
 	}
+
+	public Chef getChef() {
+		return chef;
+	}
+
+	public void setChef(Chef chef) {
+		this.chef = chef;
+	}
 	
+	public void addBuffet(Buffet buffet) {
+		this.buffets.add(buffet);
+	}
 	
+	public void removeBuffet(Buffet buffet) {
+		this.buffets.remove(buffet);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(buffets, descrizione, id, ingredienti, nome);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Piatto other = (Piatto) obj;
+		return Objects.equals(buffets, other.buffets) && Objects.equals(descrizione, other.descrizione)
+				&& Objects.equals(id, other.id) && Objects.equals(ingredienti, other.ingredienti)
+				&& Objects.equals(nome, other.nome);
+	}
 	
 }
