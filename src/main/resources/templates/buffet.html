@@ -5,7 +5,7 @@
     <title>Buffet</title>
 </head>
 <body>
-    <a href="/">Home</a>
+    <a href="home.html" th:href="@{/home}">Home</a>
     <h1>Dettagli sul buffet</h1>
     <div th:if="${buffet}">
         <p th:text="'Nome: ' + ${buffet.nome}">Nome: Buffet x</p>
@@ -18,13 +18,13 @@
                 th:text="${piatto.nome}">Carbonara</a>
             </li>
         </ul>
-        <form th:action="@{'/piatto/form/get/all/chef=' + ${buffet.chef.id} + 'buffet=' + ${buffet.id}}" method="get">
+        <form th:if=${admin} th:action="@{'/admin/piatto/form/addToBuffet/c=' + ${buffet.chef.id} + 'b=' + ${buffet.id}}" method="get">
             <span><button type="submit">Gestisci piatti</button></span>
         </form>
-        <form th:action="@{'/buffet/form/modify/' + ${buffet.id}}" method="get" th:object="${buffet}">
+        <form th:if=${admin} th:action="@{'/admin/buffet/form/modify/' + ${buffet.id}}" method="get" th:object="${buffet}">
             <span><button type="submit">Modifica</button></span>
         </form>
-        <form th:action="@{'/buffet/delete/' + ${buffet.id}}" method="post" th:object="${buffet}">
+        <form th:if=${admin} th:action="@{'/admin/buffet/delete/' + ${buffet.id}}" method="post" th:object="${buffet}">
             <span><button type="submit">Elimina</button></span>
         </form>
         

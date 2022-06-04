@@ -42,11 +42,12 @@
     <title>Catering</title>
   </head>
   <body>
-    <a href="/">Home</a>
+    <a href="home.html" th:href="@{/home}">Home</a>
     <h1>Inserimento buffet</h1>
     <div class="formprova">
-      <form th:action="@{/buffet/add}" method="post" th:object="${buffet}">
+      <form th:action="@{/admin/buffet/add}" method="post" th:object="${buffet}">
         <input type="hidden" th:field="*{piatti}">
+        <input type="hidden" th:field="*{id}">
         <div>
           <span>Nome:</span>
           <span><input type="text" th:field="*{nome}"></span>

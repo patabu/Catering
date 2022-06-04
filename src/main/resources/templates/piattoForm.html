@@ -50,10 +50,10 @@
     <title>Catering</title>
   </head>
   <body>
-    <a href="/">Home</a>
+    <a href="home.html" th:href="@{/home}">Home</a>
     <h1>Operazioni</h1>
     <div class="formprova">
-      <form th:action="@{/piatto/add}" method="post" th:object="${piatto}">
+      <form th:action="@{/admin/piatto/add}" method="post" th:object="${piatto}">
         <input type="hidden" th:field="*{id}">
         <input type="hidden" th:field="*{buffets}">
         <input type="hidden" th:field="*{ingredienti}">
@@ -72,15 +72,6 @@
               <option th:each="c : ${chefs}" th:value="${c.id}" th:text="${c.nome}"></option>
             </select>
           </span>
-        </div>
-        <div>
-          <p>Ingredienti:</p>
-          <ul>
-            <li th:each="i : *{ingredienti}">
-              <p th:text="${i.nome}">Pasta <span><input type="button">X</span></p>
-            </li>
-        </ul>
-        <a href="ingredienteForm.html" th:href="@{/ingrediente/form/add}">+ Ingrediente</a>
         </div>
         <div>
           <span><button type="submit" th:if="${modifyForm}">Modifica</button></span>

@@ -6,7 +6,7 @@
     <title>Catering</title>
   </head>
   <body>
-    <a href="/">Home</a>
+    <a href="home.html" th:href="@{/home}">Home</a>
     <h1>Operazioni</h1>
     <div class="formprova">
       <!--
@@ -15,7 +15,7 @@
         th:field => specifica il campo dell'oggetto, in particolare l'asterisco denota che
                     si tratta di un campo facente parte dell'oggetto definito in th:object
       -->
-      <form th:action="@{/chef/add}" method="post" th:object="${chef}">
+      <form th:action="@{/admin/chef/add}" method="post" th:object="${chef}">
         <div th:if="${#fields.hasGlobalErrors()}">
           <p th:each="err: ${#fields.globalErrors()}" th:text="${err}">...</p>
         </div>

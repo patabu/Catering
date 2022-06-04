@@ -1,32 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Catering</title>
-  </head>
-  <body>
+<body>
     <div>
-      <h1>Operazioni</h1>
-      <div>
-        <p>Chef</p>
-        <p><a th:href="@{/chef/form/add}">Aggiungi</a></p>
-        <p><a th:href="@{/chef/get/all}">Elenco</a></p>
-      </div>
-      <div>
-        <p>Piatto</p>
-        <p><a th:href="@{/piatto/form/add}">Aggiungi</a></p>
-        <p><a th:href="@{/piatto/get/all}">Elenco</a></p>
-      </div>
-      <div>
-        <p>Buffet</p>
-        <p><a th:href="@{/buffet/form/add}">Aggiungi</a></p>
-        <p><a th:href="@{/buffet/get/all}">Elenco</a></p>
-      </div>
-      <div>
-        <p>Ingrediente</p>
-        <p><a th:href="@{/ingrediente/form/add}">Aggiungi</a></p>
-        <p><a th:href="@{/ingrediente/get/all}">Elenco</a></p>
-      </div>
+    	<h4 th:text="#{header.index}">Welcome Page</h4>
+		<div>
+			<a th:href="@{/login}" th:text="#{index.login}">Accedi</a>
+   		</div>
+		<div>
+			<a th:href="@{/register}" th:text="#{index.register}">Registrati</a>
+   		</div>
     </div>
-  </body>
+</body>
 </html>

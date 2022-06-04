@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select</title>
+</head>
+<body>
+    <a href="home.html" th:href="@{/home}">Home</a>
+    <h1>Seleziona gli ingredienti da aggiungere</h1>
+    <form th:action="@{'/admin/piatto/' + *{piattoId} + '/add/ingredienti'}" method="post" th:object="${ingredientiSelectorDTO}">
+        <input type="hidden" th:field="*{piattoId}">
+        <div>
+            <ul>
+                <li th:each="ingrediente : *{ingredienti}">
+                    <input type="checkbox" th:field="*{ingredientiSelected}" th:value="${ingrediente.id}">
+                    <label th:text="${ingrediente.nome}">Nome ingrediente</label>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <span><button type="submit">Aggiungi</button></span>
+          </div>
+    </form>
+</body>
+</html>

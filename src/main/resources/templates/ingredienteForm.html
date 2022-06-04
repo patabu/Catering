@@ -6,14 +6,15 @@
     <title>Catering</title>
   </head>
   <body>
-    <a href="/">Home</a>
+    <a href="home.html" th:href="@{/home}">Home</a>
     <h1>Ingrediente</h1>
     <div class="formprova">
-      <form th:action="@{/ingrediente/add}" method="post" th:object="${ingrediente}">
+      <form th:action="@{/admin/ingrediente/add}" method="post" th:object="${ingrediente}">
         <div th:if="${#fields.hasGlobalErrors()}">
           <p th:each="err: ${#fields.globalErrors()}" th:text="${err}">...</p>
         </div>
         <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{piatti}"/>
         <div>
           <span>Nome:</span>
           <span><input type="text" th:field="*{nome}"></span>

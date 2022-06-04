@@ -5,9 +5,9 @@
     <title>Select</title>
 </head>
 <body>
-    <a href="/">Home</a>
+    <a href="home.html" th:href="@{/home}">Home</a>
     <h1>Seleziona i piatti da aggiungere</h1>
-    <form th:action="@{'/buffet/' + *{buffetId} + '/add/piatti'}" method="post" th:object="${piattiSelectorDTO}">
+    <form th:action="@{'/admin/buffet/' + *{buffetId} + '/add/piatti'}" method="post" th:object="${piattiSelectorDTO}">
         <input type="hidden" th:field="*{buffetId}">
         <input type="hidden" th:field="*{piatti}">
         <div>

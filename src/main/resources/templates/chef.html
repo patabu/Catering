@@ -6,7 +6,7 @@
     <title>Chef</title>
 </head>
 <body>
-    <a href="/">Home</a>
+    <a href="home.html" th:href="@{/home}">Home</a>
     <h1 th:if="!${modified}">Dettagli sullo chef</h1>
     <h1 th:if="${modified}">Chef aggiornato</h1>
     <div th:if="${chef}">
@@ -28,10 +28,10 @@
             </li>
         </ul>
         <div>
-            <form th:action="@{'/chef/form/modify/' + ${chef.id}}" method="get" th:object="${chef}">
+            <form th:if=${admin} th:action="@{'/admin/chef/form/modify/' + ${chef.id}}" method="get" th:object="${chef}">
                 <button type="submit">Modifica</button>
             </form>
-            <form th:action="@{'/chef/delete/' + ${chef.id}}" method="post" th:object="${chef}">
+            <form th:if=${admin} th:action="@{'/admin/chef/delete/' + ${chef.id}}" method="post" th:object="${chef}">
                 <button type="submit">Elimina</button>
             </form>
         </div>

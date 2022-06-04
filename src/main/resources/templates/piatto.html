@@ -5,12 +5,13 @@
     <title>Piatto</title>
 </head>
 <body>
-    <a href="/">Home</a>
+    <a href="home.html" th:href="@{/home}">Home</a>
     <h1>Dettagli sul piatto</h1>
     <div th:if="${piatto}">
         <p th:text="'Nome: ' + ${piatto.nome}">Carbonara</p>
         <p th:text="'Descrizione: ' + ${piatto.descrizione}">con panna</p>
-        <h2>Utilizza i seguenti ingredienti</h2>
+        <p th:text="'Proposto dallo chef: ' + ${piatto.chef.nome} + ' ' + ${piatto.chef.cognome}"></p>
+        <h2>Utilizza i seguenti ingredienti <a th:if=${admin} href="ingredienteForm.html" th:href="@{'/admin/ingrediente/form/addToPiatto/p=' + ${piatto.id}}">(Gestisci)</a></h2>
         <ul>
             <li th:each="ingrediente : ${piatto.ingredienti}">
                 <a href="ingrediente.html" th:href="@{'/ingrediente/get/' + ${ingrediente.id}}"
@@ -24,10 +25,10 @@
                 th:text="${buffet.nome} + ': ' + ${buffet.descrizione}">Buffet x: Evento 2021</a>
             </li>
         </ul>
-        <form th:action="@{'/piatto/form/modify/' + ${piatto.id}}" method="get" th:object="${piatto}">
+        <form th:if=${admin} th:action="@{'/admin/piatto/form/modify/' + ${piatto.id}}" method="get" th:object="${piatto}">
             <span><button type="submit">Modifica</button></span>
         </form>
-        <form th:action="@{'/piatto/delete/' + ${piatto.id}}" method="post" th:object="${piatto}">
+        <form th:if=${admin} th:action="@{'/admin/piatto/delete/' + ${piatto.id}}" method="post" th:object="${piatto}">
             <span><button type="submit">Elimina</button></span>
         </form>
     </div>

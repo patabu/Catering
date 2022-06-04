@@ -5,13 +5,18 @@
     <title>Elenco</title>
 </head>
 <body>
-    <a href="/">Home</a>
-    <h4>Elenco piatti</h4>
-    <ul>
-        <li th:each="piatto : ${piatti}">
-            <a href="piatto.html" th:href="@{'/piatto/get/' + ${piatto.id}}"
-                th:text="${piatto.nome} + ': ' + ${piatto.descrizione}">Pasta al sugo: pasta al sugo di ragù</a>
-        </li>
-    </ul>
+    <a href="home.html" th:href="@{/home}">Home</a>
+    <div th:if="${piatti.size()}">
+        <h4>Elenco piatti</h4>
+        <ul>
+            <li th:each="piatto : ${piatti}">
+                <a href="piatto.html" th:href="@{'/piatto/get/' + ${piatto.id}}"
+                    th:text="${piatto.nome} + ': ' + ${piatto.descrizione}">Pasta al sugo: pasta al sugo di ragù</a>
+            </li>
+        </ul>
+    </div>
+    <div th:if="!${piatti.size()}">
+        <h2>Non sono presenti piatti</h2>
+    </div>
 </body>
 </html>

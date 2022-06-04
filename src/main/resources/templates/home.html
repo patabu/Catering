@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Catering</title>
+  </head>
+  <body>
+    <a href="index.html" th:href="@{/logout}">Logout</a>
+    <div>
+      <h1>Catering</h1>
+      <div>
+        <p>Chef</p>
+        <p th:if="${admin}"><a th:href="@{/admin/chef/form/add}">Aggiungi</a></p>
+        <p><a th:href="@{/chef/get/all}">Elenco</a></p>
+      </div>
+      <div>
+        <p>Piatto</p>
+        <p th:if="${admin}"><a th:href="@{/admin/piatto/form/add}">Aggiungi</a></p>
+        <p><a th:href="@{/piatto/get/all}">Elenco</a></p>
+      </div>
+      <div>
+        <p>Buffet</p>
+        <p th:if="${admin}"><a th:href="@{/admin/buffet/form/add}">Aggiungi</a></p>
+        <p><a th:href="@{/buffet/get/all}">Elenco</a></p>
+      </div>
+      <div>
+        <p>Ingrediente</p>
+        <p th:if="${admin}"><a th:href="@{/admin/ingrediente/form/add}">Aggiungi</a></p>
+        <p><a th:href="@{/ingrediente/get/all}">Elenco</a></p>
+      </div>
+    </div>
+  </body>
+</html>
