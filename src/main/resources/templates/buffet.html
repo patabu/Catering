@@ -3,21 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Buffet</title>
+    <head th:replace="fragments/base.html :: headerfiles(title='Catering')">
+        <link rel="stylesheet" href="../static/css/style.css">
+    </head>
 </head>
 <body>
-    <a href="home.html" th:href="@{/home}">Home</a>
-    <h1>Dettagli sul buffet</h1>
-    <div th:if="${buffet}">
-        <p th:text="'Nome: ' + ${buffet.nome}">Nome: Buffet x</p>
-        <p th:text="'Descrizione: ' + ${buffet.descrizione}">Descrizione: Evento 2021</p>
-        <p th:text="'Proposto dallo chef: ' + ${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}"></p>
-        <h2>Propone i seguenti piatti</h2>
-        <ul>
-            <li th:each="piatto : ${buffet.piatti}">
-                <a href="piatto.html" th:href="@{'/piatto/get/' + ${piatto.id}}"
-                th:text="${piatto.nome}">Carbonara</a>
-            </li>
-        </ul>
+    <header th:replace="fragments/base.html :: home">
+        <a href="home.html" th:href="@{/home}"><img src="/static/images/home.png"></a>
+    </header>
+    <h2>Dettagli sul buffet</h2>
+    <h2>Buffet aggiornato</h2>
+    <div class="detailsContainer" th:if="${buffet}">
+        <div class="basicDetails">
+            <p th:text="'Nome: ' + ${buffet.nome}">Nome: Buffet x</p>
+            <p th:text="'Descrizione: ' + ${buffet.descrizione}">Descrizione: Evento 2021</p>
+            <p th:text="'Proposto dallo chef: ' + ${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}"></p>
+        </div>
+        <div class="listDetails">
+            <h2>Propone i seguenti piatti:</h2>
+            <ul>
+                <li th:each="piatto : ${buffet.piatti}">
+                    <a href="piatto.html" th:href="@{'/piatto/get/' + ${piatto.id}}"
+                    th:text="${piatto.nome}">Carbonara</a>
+                </li>
+            </ul>
+        </div>
         <form th:if=${admin} th:action="@{'/admin/piatto/form/addToBuffet/c=' + ${buffet.chef.id} + 'b=' + ${buffet.id}}" method="get">
             <span><button type="submit">Gestisci piatti</button></span>
         </form>

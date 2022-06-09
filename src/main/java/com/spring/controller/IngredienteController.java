@@ -78,6 +78,7 @@ public class IngredienteController {
 	@PostMapping("/admin/piatto/{piattoId}/add/ingredienti")
 	public String addIngredientiToPiatto(@PathVariable("piattoId") Long piattoId, @ModelAttribute("ingredientiSelectorDTO") IngredientiSelectorDTO dto, Model model) {
 		model.addAttribute("piatto", this.ingredienteService.addIngredientiToPiatto(dto));
+		this.credentialsService.setRoleInModel(model);
 		return "piatto.html";
 	}
 	

@@ -2,21 +2,28 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <head th:replace="fragments/base.html :: headerfiles(title='Catering')">
+        <link rel="stylesheet" href="../static/css/style.css">
+    </head>
     <title>Elenco</title>
 </head>
 <body>
-    <a href="home.html" th:href="@{/home}">Home</a>
-    <div th:if="${buffets.size()}">
-        <h1>Elenco buffet</h1>
-        <ul>
-            <li th:each="buffet : ${buffets}">
-                <a href="buffet.html" th:href="@{'/buffet/get/' + ${buffet.id}}" 
-                th:text="${buffet.nome} + ': ' + ${buffet.descrizione}">Buffet x: Evento 2021</a>
-            </li>
-        </ul>
-    </div>
-    <div th:if="!${buffets.size()}">
-        <h2>Non sono presenti buffet</h2>
+    <header th:replace="fragments/base.html :: home">
+        <a href="home.html" th:href="@{/home}"><img src="/static/images/home.png"></a>
+    </header>
+    <h2>ELENCO BUFFETS:</h2>
+    <div class="listcontainer">
+        <div th:if="${buffets.size()}">
+            <ul>
+                <li th:each="buffet : ${buffets}">
+                    <a href="buffet.html" th:href="@{'/buffet/get/' + ${buffet.id}}" 
+                    th:text="${buffet.nome} + ': ' + ${buffet.descrizione}">Buffet x: Evento 2021</a>
+                </li>
+            </ul>
+        </div>
+        <div th:if="!${buffets.size()}">
+            <h2>Non sono presenti buffet</h2>
+        </div>
     </div>
 </body>
 </html>

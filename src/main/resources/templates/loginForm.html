@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+	<header>
+		<head th:replace="fragments/base.html :: headerfiles(title='Catering')">
+			<link rel="stylesheet" href="../static/css/style.css">
+		</head>
+	</header>
 <body>
-	<div>
-		<h4>Login</h4>
+	<div class="authenticationContainer">
+		<h3 th:if="${username}">Congratulazioni, ti sei registrato!</h3>
+		<form action="home.html" th:action="@{/login}" method="get" th:method="post">
+			<h2>LOGIN</h2>
+			<div class="formAuth">
+				<div>
+					<span><input name="username" type="text" required placeholder="Username"/></span>
+				</div>
+				<div>
+					<span><input name="password" type="password" required placeholder="Password"/></span>
+				</div>
+				<div>
+					<span><button type="submit">LOGIN</button></span>
+					<p>or</p>
+				</div>
+			</div>
+		</form>
+		<form action="registerForm.html" th:action="@{/register}" method="get">
+			<div class="formAuth">
+				<button id="register" type="submit">REGISTER</button>
+			</div>
+		</form>
 	</div>
-	<form th:action="@{/login}" method="post">
-		<div>
-			<div>
-				<span>Username:</span>
-				<span><input name="username" type="text" required /></span>
-			</div>		
-			<div>
-				<span>Password:</span>
-				<span><input name="password" type="password" required /></span>
-			</div>
-			<div>
-				<span><button type="submit">Login</button></span>
-			</div>
-		</div>
-	</form>
-</body>
+	<footer th:replace="fragments/base.html :: end">
+		Gesu
+	</footer>
+</body> 
 </html>

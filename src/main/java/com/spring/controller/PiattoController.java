@@ -79,7 +79,7 @@ public class PiattoController {
 		return "piattoForm.html";
 	}
 	 
-	@GetMapping("/admin/piatto/form/addToBuffet/c={chefId}b={buffetId}")
+	@GetMapping("/admin/piatto/form/addToBuffet/c={chefId}b={buffetId}")   
 	public String getFormSelectPiattiByChefId(@PathVariable("chefId") Long chefId, @PathVariable("buffetId") Long buffetId, Model model) {    
 		Buffet buffet = this.buffetService.getBuffetById(buffetId);
 		PiattiSelectorDTO piattiSelectorDTO = new PiattiSelectorDTO(buffetId, this.piattoService.getAllPiattiByChefId(chefId), buffet.getPiatti());
@@ -94,7 +94,7 @@ public class PiattoController {
 		return "buffet.html";
 	}
 	
-	@PostMapping("/admin/piatto/delete/{id}")
+	@PostMapping("/admin/piatto/delete/{id}") 
 	public String deletePiattoById(@PathVariable("id") Long id, Model model) {
 		this.piattoService.deletePiattoById(id);
 		model.addAttribute("piatti", this.piattoService.getAllPiatti());

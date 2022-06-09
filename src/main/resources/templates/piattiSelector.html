@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <head th:replace="fragments/base.html :: headerfiles(title='Catering')">
+        <link rel="stylesheet" href="../static/css/style.css">
+      </head>
     <title>Select</title>
 </head>
 <body>
-    <a href="home.html" th:href="@{/home}">Home</a>
+    <header th:replace="fragments/base.html :: home">
+        <a href="home.html" th:href="@{/home}"><img src="/static/images/home.png"></a>
+    </header>
     <h1>Seleziona i piatti da aggiungere</h1>
     <form th:action="@{'/admin/buffet/' + *{buffetId} + '/add/piatti'}" method="post" th:object="${piattiSelectorDTO}">
         <input type="hidden" th:field="*{buffetId}">

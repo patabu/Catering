@@ -2,31 +2,39 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <head th:replace="fragments/base.html :: headerfiles(title='Catering')">
+        <link rel="stylesheet" href="../static/css/style.css">
+    </head>
     <title>Chef</title>
 </head>
 <body>
-    <a href="home.html" th:href="@{/home}">Home</a>
-    <h1 th:if="!${modified}">Dettagli sullo chef</h1>
-    <h1 th:if="${modified}">Chef aggiornato</h1>
-    <div th:if="${chef}">
-        <p th:text="'Nome: ' + ${chef.nome}">Nome: Paolo</p>
-        <p th:text="'Cognome: ' + ${chef.cognome}">Cognome: Rossi</p>
-        <p th:text="'Nazionalità: ' + ${chef.nazionalita}">Nazionalità: Italia</p>
-        <h2>Piatti</h2>
-        <ul>
-            <li th:each="piatto : ${chef.piatti}">
-                <a href="piatto.html" th:href="@{'/piatto/get/' + ${piatto.id}}"
-                th:text="${piatto.nome} + ': ' + ${piatto.descrizione}">Carbonara: panna</a>
-            </li>
-        </ul>
-        <h2>Buffet proposti</h2>
-        <ul>
-            <li th:each="buffet : ${chef.buffets}">
-                <a href="buffet.html" th:href="@{'/buffet/get/' + ${buffet.id}}"
-                th:text="${buffet.nome} + ': ' + ${buffet.descrizione}">Buffet x: Evento 2021</a>
-            </li>
-        </ul>
+    <header th:replace="fragments/base.html :: home">
+        <a href="home.html" th:href="@{/home}"><img src="/static/images/home.png"></a>
+    </header>
+    <h2 th:if="!${modified}">Dettagli sullo chef</h2>
+    <h2 th:if="${modified}">Chef aggiornato</h2>
+    <div class="detailsContainer" th:if="${chef}">
+        <div class="basicDetails">
+            <p th:text="'Nome: ' + ${chef.nome}">Nome: Paolo</p>
+            <p th:text="'Cognome: ' + ${chef.cognome}">Cognome: Rossi</p>
+            <p th:text="'Nazionalità: ' + ${chef.nazionalita}">Nazionalità: Italia</p>
+        </div>
+        <div class="listDetails">
+            <h2>Piatti:</h2>
+            <ul>
+                <li th:each="piatto : ${chef.piatti}">
+                    <a href="piatto.html" th:href="@{'/piatto/get/' + ${piatto.id}}"
+                    th:text="${piatto.nome} + ': ' + ${piatto.descrizione}">Carbonara: panna</a>
+                </li>
+            </ul>
+            <h2>Buffet proposti:</h2>
+            <ul>
+                <li th:each="buffet : ${chef.buffets}">
+                    <a href="buffet.html" th:href="@{'/buffet/get/' + ${buffet.id}}"
+                    th:text="${buffet.nome} + ': ' + ${buffet.descrizione}">Buffet x: Evento 2021</a>
+                </li>
+            </ul>
+        </div>
         <div>
             <form th:if=${admin} th:action="@{'/admin/chef/form/modify/' + ${chef.id}}" method="get" th:object="${chef}">
                 <button type="submit">Modifica</button>

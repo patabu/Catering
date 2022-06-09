@@ -2,21 +2,28 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <head th:replace="fragments/base.html :: headerfiles(title='Catering')">
+        <link rel="stylesheet" href="../static/css/style.css">
+      </head>
     <title>Elenco</title>
 </head>
 <body>
-    <a href="home.html" th:href="@{/home}">Home</a>
-    <div th:if="${piatti.size()}">
-        <h4>Elenco piatti</h4>
-        <ul>
-            <li th:each="piatto : ${piatti}">
-                <a href="piatto.html" th:href="@{'/piatto/get/' + ${piatto.id}}"
-                    th:text="${piatto.nome} + ': ' + ${piatto.descrizione}">Pasta al sugo: pasta al sugo di ragù</a>
-            </li>
-        </ul>
-    </div>
-    <div th:if="!${piatti.size()}">
-        <h2>Non sono presenti piatti</h2>
+    <header th:replace="fragments/base.html :: home">
+        <a href="home.html" th:href="@{/home}"><img src="/static/images/home.png"></a>
+    </header>
+    <h2>ELENCO PIATTI:</h2>
+    <div class="listcontainer">
+        <div th:if="${piatti.size()}">
+            <ul>
+                <li th:each="piatto : ${piatti}">
+                    <a href="piatto.html" th:href="@{'/piatto/get/' + ${piatto.id}}"
+                        th:text="${piatto.nome} + ': ' + ${piatto.descrizione}">Pasta al sugo: pasta al sugo di ragù</a>
+                </li>
+            </ul>
+        </div>
+        <div th:if="!${piatti.size()}">
+            <h2>Non sono presenti piatti</h2>
+        </div>
     </div>
 </body>
 </html>

@@ -2,13 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="style.css">
+    <head th:replace="fragments/base.html :: headerfiles(title='Catering')">
+      <link rel="stylesheet" href="../static/css/style.css">
+    </head>
     <title>Catering</title>
   </head>
   <body>
-    <a href="home.html" th:href="@{/home}">Home</a>
-    <h1>Operazioni</h1>
-    <div class="formprova">
+    <header th:replace="fragments/base.html :: home">
+      <a href="home.html" th:href="@{/home}"><img src="/static/images/home.png"></a>
+    </header>
+    <h2>CHEF:</h2>
+    <div class="formcontainer">
       <!--
         th:action => specifica l'url a cui mandare la richiesta HTTP
         th:object => specifica che i dati raccolti dalla form sono dati che comporrano un oggetto persona

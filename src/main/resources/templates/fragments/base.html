@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles(title)">
+	<meta charset="UTF-8"/>
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+	<title th:text="${title}"></title>
+</head>
+<body>
+	<header th:fragment="home">
+		<a th:href="@{/home}" alt="Home"><img th:src="@{/images/home.png}"></a>
+	</header>
+	<footer th:fragment="end">
+		Progetto d'esame siw (docente) 2022 - Davide Bucci 547920
+	</footer>	
+</body>
+</html>

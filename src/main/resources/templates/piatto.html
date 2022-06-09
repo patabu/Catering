@@ -2,35 +2,45 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <head th:replace="fragments/base.html :: headerfiles(title='Catering')">
+        <link rel="stylesheet" href="../static/css/style.css">
+    </head>
     <title>Piatto</title>
 </head>
 <body>
-    <a href="home.html" th:href="@{/home}">Home</a>
-    <h1>Dettagli sul piatto</h1>
-    <div th:if="${piatto}">
-        <p th:text="'Nome: ' + ${piatto.nome}">Carbonara</p>
-        <p th:text="'Descrizione: ' + ${piatto.descrizione}">con panna</p>
-        <p th:text="'Proposto dallo chef: ' + ${piatto.chef.nome} + ' ' + ${piatto.chef.cognome}"></p>
-        <h2>Utilizza i seguenti ingredienti <a th:if=${admin} href="ingredienteForm.html" th:href="@{'/admin/ingrediente/form/addToPiatto/p=' + ${piatto.id}}">(Gestisci)</a></h2>
-        <ul>
-            <li th:each="ingrediente : ${piatto.ingredienti}">
-                <a href="ingrediente.html" th:href="@{'/ingrediente/get/' + ${ingrediente.id}}"
-                th:text="${ingrediente.nome}">Sale</a>
-            </li>
-        </ul>
-        <h2>Proposto nei seguenti buffet</h2>
-        <ul>
-            <li th:each="buffet : ${piatto.buffets}">
-                <a href="buffet.html" th:href="@{'/buffet/get/' + ${buffet.id}}"
-                th:text="${buffet.nome} + ': ' + ${buffet.descrizione}">Buffet x: Evento 2021</a>
-            </li>
-        </ul>
-        <form th:if=${admin} th:action="@{'/admin/piatto/form/modify/' + ${piatto.id}}" method="get" th:object="${piatto}">
-            <span><button type="submit">Modifica</button></span>
-        </form>
-        <form th:if=${admin} th:action="@{'/admin/piatto/delete/' + ${piatto.id}}" method="post" th:object="${piatto}">
-            <span><button type="submit">Elimina</button></span>
-        </form>
+    <header th:replace="fragments/base.html :: home">
+        <a href="home.html" th:href="@{/home}"><img src="/static/images/home.png"></a>
+    </header>
+    <h2 th:if="!${modified}">Dettagli sul piatto</h2>
+    <h2 th:if="${modified}">Piatto aggiornato</h2>
+    <div class="detailsContainer" th:if="${piatto}">
+        <div class="basicDetails">
+            <p th:text="'Nome: ' + ${piatto.nome}">Carbonara</p>
+            <p th:text="'Descrizione: ' + ${piatto.descrizione}">con panna</p>
+            <p th:text="'Proposto dallo chef: ' + ${piatto.chef.nome} + ' ' + ${piatto.chef.cognome}"></p>
+        </div>
+        <div class="listDetails">
+            <h2>Utilizza i seguenti ingredienti <a th:if=${admin} href="ingredienteForm.html" th:href="@{'/admin/ingrediente/form/addToPiatto/p=' + ${piatto.id}}">(Gestisci)</a></h2>
+            <ul>
+                <li th:each="ingrediente : ${piatto.ingredienti}">
+                    <a href="ingrediente.html" th:href="@{'/ingrediente/get/' + ${ingrediente.id}}"
+                    th:text="${ingrediente.nome}">Sale</a>
+                </li>
+            </ul>
+            <h2>Proposto nei seguenti buffet</h2>
+            <ul>
+                <li th:each="buffet : ${piatto.buffets}">
+                    <a href="buffet.html" th:href="@{'/buffet/get/' + ${buffet.id}}"
+                    th:text="${buffet.nome} + ': ' + ${buffet.descrizione}">Buffet x: Evento 2021</a>
+                </li>
+            </ul>
+        </div>
     </div>
+    <form th:if=${admin} th:action="@{'/admin/piatto/form/modify/' + ${piatto.id}}" method="get" th:object="${piatto}">
+        <p><button type="submit">Modifica</button></p>
+    </form>
+    <form th:if=${admin} th:action="@{'/admin/piatto/delete/' + ${piatto.id}}" method="post" th:object="${piatto}">
+        <p><button type="submit">Elimina</button></p>
+    </form>
 </body>
 </html>

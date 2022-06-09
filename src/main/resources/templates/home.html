@@ -1,32 +1,72 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <meta charset="UTF-8" />
-    <title>Catering</title>
+    <head th:replace="fragments/base.html :: headerfiles(title='Catering')">
+      <link rel="stylesheet" href="../static/css/style.css">
+    </head>
   </head>
   <body>
-    <a href="index.html" th:href="@{/logout}">Logout</a>
-    <div>
-      <h1>Catering</h1>
-      <div>
-        <p>Chef</p>
-        <p th:if="${admin}"><a th:href="@{/admin/chef/form/add}">Aggiungi</a></p>
-        <p><a th:href="@{/chef/get/all}">Elenco</a></p>
+    <!--<header th:replace="fragments/base.html :: intestazione"></header>-->
+    <header>
+      <a href="index.html" th:href="@{/logout}"><img src="../static/images/logout.png" th:src="@{/images/logout.png}" alt="logout"></a>
+      <h1>CATERING</h1>
+    </header>
+    <div class="cards">
+      <div class="card">
+        <div class="title">
+          <div class="name">
+            Chef
+          </div>
+          <div>
+            <img class="icon" src="../static/images/chef.png" th:src="@{images/chef.png}">
+          </div>
+        </div>
+        <div class="buttons">
+          <a class="button" href="chefForm.html" th:if="${admin}" th:href="@{/admin/chef/form/add}"><img src="../static/images/plus.png" th:src="@{images/plus.png}">Aggiungi</a>
+          <a class="button" href="chefs.html" th:href="@{/chef/get/all}"><img src="../static/images/list.png" th:src="@{images/list.png}">Elenco</a>
+        </div>
       </div>
-      <div>
-        <p>Piatto</p>
-        <p th:if="${admin}"><a th:href="@{/admin/piatto/form/add}">Aggiungi</a></p>
-        <p><a th:href="@{/piatto/get/all}">Elenco</a></p>
+      <div class="card">
+        <div class="title">
+          <div class="name">
+            Piatti
+          </div>
+          <div>
+            <img class="icon" src="../static/images/piatto.png" th:src="@{images/piatto.png}">
+          </div>
+        </div>
+        <div class="buttons">
+          <a class="button" href="piattoForm.html" th:if="${admin}" th:href="@{/admin/piatto/form/add}"><img src="../static/images/plus.png" th:src="@{images/plus.png}">Aggiungi</a>
+          <a class="button" href="piatti.html"th:href="@{/piatto/get/all}"><img src="../static/images/list.png" th:src="@{images/list.png}">Elenco</a>
+        </div>
       </div>
-      <div>
-        <p>Buffet</p>
-        <p th:if="${admin}"><a th:href="@{/admin/buffet/form/add}">Aggiungi</a></p>
-        <p><a th:href="@{/buffet/get/all}">Elenco</a></p>
+      <div class="card">
+        <div class="title">
+          <div class="name">
+            Buffet
+          </div>
+          <div>
+            <img class="icon" src="../static/images/buffet.png" th:src="@{images/buffet.png}">
+          </div>
+        </div>
+        <div class="buttons">
+          <a class="button" href="buffetForm.html" th:if="${admin}" th:href="@{/admin/buffet/form/add}"><img src="../static/images/plus.png" th:src="@{images/plus.png}">Aggiungi</a>
+          <a class="button" href="buffets.html" th:href="@{/buffet/get/all}"><img src="../static/images/list.png" th:src="@{images/list.png}">Elenco</a>
+        </div>
       </div>
-      <div>
-        <p>Ingrediente</p>
-        <p th:if="${admin}"><a th:href="@{/admin/ingrediente/form/add}">Aggiungi</a></p>
-        <p><a th:href="@{/ingrediente/get/all}">Elenco</a></p>
+      <div class="card">
+        <div class="title">
+          <div class="name">
+            Ingredienti
+          </div>
+          <div>
+            <img class="icon" src="../static/images/ingrediente.png" th:src="@{images/ingrediente.png}">
+          </div>
+        </div>
+        <div class="buttons">
+          <a class="button" href="ingredienteForm.html" th:if="${admin}" th:href="@{/admin/ingrediente/form/add}"><img src="../static/images/plus.png" th:src="@{images/plus.png}">Aggiungi</a>
+          <a class="button" href="ingredienti.html" th:href="@{/ingrediente/get/all}"><img src="../static/images/list.png" th:src="@{images/list.png}">Elenco</a>
+        </div>
       </div>
     </div>
   </body>

@@ -2,21 +2,28 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <head th:replace="fragments/base.html :: headerfiles(title='Catering')">
+        <link rel="stylesheet" href="../static/css/style.css">
+      </head>
     <title>Elenco</title>
 </head>
 <body>
-    <a href="home.html" th:href="@{/home}">Home</a>
-    <div th:if="${chefs.size()}">
-        <h1>Elenco chef</h1>
-        <ul>
-            <li th:each="chef : ${chefs}">
-                <a href="chef.html" th:href="@{'/chef/get/' + ${chef.id}}" th:text="${chef.nome} + ' ' + ${chef.cognome}">Mario Rossi</a>
-                <span th:text="'(' + ${chef.nazionalita} + ') - Piatti: ' + ${chef.piatti.size()} + ' - Buffet:' + ${chef.buffets.size()}"> (Italia) - Piatti: 5 - Buffet: 2</span>
-            </li>
-        </ul>
-    </div>
-    <div th:if="!${chefs.size()}">
-        <h2>Non sono presenti chef</h2>
+    <header th:replace="fragments/base.html :: home">
+        <a href="home.html" th:href="@{/home}"><img src="/static/images/home.png"></a>
+    </header>
+    <h2>ELENCO CHEF:</h2>
+    <div class="listcontainer">
+        <div th:if="${chefs.size()}">
+            <ul>
+                <li th:each="chef : ${chefs}">
+                    <a href="chef.html" th:href="@{'/chef/get/' + ${chef.id}}" th:text="${chef.nome} + ' ' + ${chef.cognome}">Mario Rossi</a>
+                    <span th:text="'(' + ${chef.nazionalita} + ') - Piatti: ' + ${chef.piatti.size()} + ' - Buffet:' + ${chef.buffets.size()}"> (Italia) - Piatti: 5 - Buffet: 2</span>
+                </li>
+            </ul>
+        </div>
+        <div th:if="!${chefs.size()}">
+            <h2>Non sono presenti chef</h2>
+        </div>
     </div>
 </body>
 </html>
