@@ -3,6 +3,7 @@ package com.spring.model;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class Piatto {
 	private Chef chef;
 	
 	//Molti piatti possono essere presenti in più buffet
-	@ManyToMany
+	@ManyToMany 
 	private Set<Buffet> buffets;
 	
 	//Molti piatti possono avere gli stessi ingredienti

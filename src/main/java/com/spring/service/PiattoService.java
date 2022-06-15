@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.spring.dto.PiattiSelectorDTO;
 import com.spring.model.Buffet;
+import com.spring.model.Ingrediente;
 import com.spring.model.Piatto;
 import com.spring.repository.BuffetRepository;
+import com.spring.repository.IngredienteRepository;
 import com.spring.repository.PiattoRepository;
 
 @Service
@@ -20,6 +22,7 @@ public class PiattoService {
 	@Autowired private BuffetService buffetService;
 	@Autowired private PiattoRepository piattoRepository;
 	@Autowired private BuffetRepository buffetRepository;
+	@Autowired private IngredienteRepository ingredienteRepository;
 	
 	public Set<Piatto> getAllPiatti() {
 		Set<Piatto> piatti = new HashSet<Piatto>();
@@ -42,7 +45,21 @@ public class PiattoService {
 		return this.piattoRepository.save(piatto);
 	}
 	
+	@Transactional
 	public void deletePiattoById(Long id) {
+		Piatto piatto = this.piattoRepository.findById(id).get();
+		for (Ingrediente i : this.ingredienteRepository.findAll()) {
+			if (piatto.getIngredienti().contains(i)) {
+				i.removePiatto(piatto);
+				this.ingredienteRepository.save(i);
+			}
+		}
+		for (Buffet b : this.buffetRepository.findAll()) {
+			if (piatto.getBuffets().contains(b)) {
+				b.removePiatto(piatto);
+				this.buffetRepository.save(b);
+			}
+		}
 		this.piattoRepository.deleteById(id);
 	}
 	

@@ -13,7 +13,7 @@ import com.spring.model.Utente;
 import com.spring.repository.UtenteRepository;
 
 @Service
-public class UtenteService { 
+public class UtenteService {
 
 	@Autowired UtenteRepository utenteRepository;
 	

@@ -2,6 +2,7 @@ package com.spring.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,11 +26,11 @@ public class Chef {
 	@NotBlank
 	private String nazionalita;	
 	
-	@OneToMany(mappedBy = "chef")
+	@OneToMany(mappedBy = "chef", cascade = CascadeType.ALL)
 	private Set<Piatto> piatti;
 	
 	//Ogni chef ha più buffet
-	@OneToMany(mappedBy = "chef")
+	@OneToMany(mappedBy = "chef", cascade = CascadeType.ALL)
 	private Set<Buffet> buffets; 
 	
 	public Chef() {

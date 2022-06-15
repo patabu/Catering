@@ -3,6 +3,7 @@ package com.spring.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class Buffet {
 	private Chef chef;
 	
 	//Molti buffet possono avere più piatti
-	@ManyToMany(mappedBy = "buffets")
+	@ManyToMany(mappedBy = "buffets") 
 	private Set<Piatto> piatti;
 	
 	public Buffet() {

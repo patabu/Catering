@@ -75,7 +75,7 @@ public class BuffetController {
 		return "buffetForm.html";
 	}
 	
-	@PostMapping("/admin/buffet/delete/{id}")
+	@GetMapping("/admin/buffet/delete/{id}")
 	public String deleteBuffetById(@PathVariable("id") Long id, Model model) {
 		this.buffetService.deleteBuffetById(id);
 		model.addAttribute("buffets", this.buffetService.getAllBuffets());

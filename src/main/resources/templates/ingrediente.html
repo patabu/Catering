@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <head th:replace="fragments/base.html :: headerfiles(title='Catering')">
         <link rel="stylesheet" href="../static/css/style.css">
-      </head>
+    </head>
     <title>Ingrediente</title>
 </head>
 <body>
     <header th:replace="fragments/base.html :: home">
         <a href="home.html" th:href="@{/home}"><img src="/static/images/home.png"></a>
     </header>
-    <h2 th:if="!${modified}">Dettagli sull'ingrediente</h2>
-    <h2 th:if="${modified}">Ingrediente aggiornato</h2>
+
     <div class="detailsContainer" th:if="${ingrediente}">
-        <div class="basicDetails">
-            <p th:text="'Nome: ' + ${ingrediente.nome}">Nome: Pasta</p>
-            <p th:text="'Origine: ' + ${ingrediente.origine}">Origine: Italia</p>
-            <p th:text="'Descrizione: ' + ${ingrediente.descrizione}">Descrizione: Rigatoni</p>
+        <div class="title">
+            <h2 th:if="!${modified}">Dettagli sull'ingrediente</h2>
+            <h2 th:if="${modified}">Ingrediente aggiornato</h2>
+            <a th:if=${admin} th:href="@{'/admin/ingrediente/form/modify/' + ${ingrediente.id}}"><img src="/static/images/pencil.png" th:src="@{/images/pencil.png}"></a>
+            <a th:if=${admin} th:href="@{'/admin/ingrediente/delete/' + ${ingrediente.id}}"><img src="/static/images/delete.png" th:src="@{/images/delete.png}"></a>
         </div>
-        <div class="listDetails">
-            <h2>Utilizzato nei seguenti piatti</h2>
-            <ul>
-                <li th:each="piatto : ${ingrediente.piatti}">
-                    <a href="piatto.html" th:href="@{'/piatto/get/' + ${piatto.id}}"
-                    th:text="'Piatto' +  ${piatto.nome} + ' di ' + ${piatto.chef.nome} + ' ' + ${piatto.chef.cognome}">Carbonara di Davide Bucci</a>
-                </li>
-            </ul>
+        <div class="content">
+            <div class="basicDetails">
+                <p th:text="'Nome: ' + ${ingrediente.nome}">Nome: Pasta</p>
+                <p th:text="'Origine: ' + ${ingrediente.origine}">Origine: Italia</p>
+                <p th:text="'Descrizione: ' + ${ingrediente.descrizione}">Descrizione: Rigatoni</p>
+            </div>
+            <div class="listDetails">
+                <h2>Utilizzato nei seguenti piatti</h2>
+                <ul>
+                    <li th:each="piatto : ${ingrediente.piatti}">
+                        <a href="piatto.html" th:href="@{'/piatto/get/' + ${piatto.id}}"
+                        th:text="${piatto.nome} + ' di ' + ${piatto.chef.nome} + ' ' + ${piatto.chef.cognome}">Carbonara di Davide Bucci</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-    <form th:if=${admin} th:action="@{'/admin/ingrediente/form/modify/' + ${ingrediente.id}}" method="get" th:object="${ingrediente}">
-        <span><button type="submit">Modifica</button></span>
-    </form>
-    <form th:if=${admin} th:action="@{'/admin/ingrediente/delete/' + ${ingrediente.id}}" method="post" th:object="${ingrediente}">
-        <span><button type="submit">Elimina</button></span>
-    </form>
 </body>
 </html>

@@ -19,10 +19,6 @@ public class AuthenticationController {
 	
 	@Autowired private CredentialsService credentialsService;
 	
-	//@Autowired private UtenteValidator utenteValidator;
-	
-	// @Autowired private CredentialsValidator credentialsValidator;
-	
 	@GetMapping("/register")
 	public String showRegisterForm (Model model) {
 		model.addAttribute("utente", new Utente());

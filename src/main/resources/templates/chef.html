@@ -11,37 +11,36 @@
     <header th:replace="fragments/base.html :: home">
         <a href="home.html" th:href="@{/home}"><img src="/static/images/home.png"></a>
     </header>
-    <h2 th:if="!${modified}">Dettagli sullo chef</h2>
-    <h2 th:if="${modified}">Chef aggiornato</h2>
+
     <div class="detailsContainer" th:if="${chef}">
-        <div class="basicDetails">
-            <p th:text="'Nome: ' + ${chef.nome}">Nome: Paolo</p>
-            <p th:text="'Cognome: ' + ${chef.cognome}">Cognome: Rossi</p>
-            <p th:text="'Nazionalità: ' + ${chef.nazionalita}">Nazionalità: Italia</p>
+        <div class="title">
+            <h2 th:if="!${modified}">Dettagli sullo chef</h2>
+            <h2 th:if="${modified}">Chef aggiornato</h2>
+            <a th:if=${admin} th:href="@{'/admin/chef/form/modify/' + ${chef.id}}"><img src="/static/images/pencil.png" th:src="@{/images/pencil.png}"></a>
+            <a th:if=${admin} th:href="@{'/admin/chef/delete/' + ${chef.id}}"><img src="/static/images/delete.png" th:src="@{/images/delete.png}"></a>
         </div>
-        <div class="listDetails">
-            <h2>Piatti:</h2>
-            <ul>
-                <li th:each="piatto : ${chef.piatti}">
-                    <a href="piatto.html" th:href="@{'/piatto/get/' + ${piatto.id}}"
-                    th:text="${piatto.nome} + ': ' + ${piatto.descrizione}">Carbonara: panna</a>
-                </li>
-            </ul>
-            <h2>Buffet proposti:</h2>
-            <ul>
-                <li th:each="buffet : ${chef.buffets}">
-                    <a href="buffet.html" th:href="@{'/buffet/get/' + ${buffet.id}}"
-                    th:text="${buffet.nome} + ': ' + ${buffet.descrizione}">Buffet x: Evento 2021</a>
-                </li>
-            </ul>
-        </div>
-        <div>
-            <form th:if=${admin} th:action="@{'/admin/chef/form/modify/' + ${chef.id}}" method="get" th:object="${chef}">
-                <button type="submit">Modifica</button>
-            </form>
-            <form th:if=${admin} th:action="@{'/admin/chef/delete/' + ${chef.id}}" method="post" th:object="${chef}">
-                <button type="submit">Elimina</button>
-            </form>
+        <div class="content">
+            <div class="basic">
+                <p th:text="'Nome: ' + ${chef.nome}">Nome: Paolo</p>
+                <p th:text="'Cognome: ' + ${chef.cognome}">Cognome: Rossi</p>
+                <p th:text="'Nazionalità: ' + ${chef.nazionalita}">Nazionalità: Italia</p>
+            </div>
+            <div class="list">
+                <h2>Piatti:</h2>
+                <ul>
+                    <li th:each="piatto : ${chef.piatti}">
+                        <a href="piatto.html" th:href="@{'/piatto/get/' + ${piatto.id}}"
+                        th:text="${piatto.nome} + ': ' + ${piatto.descrizione}">Carbonara: panna</a>
+                    </li>
+                </ul>
+                <h2>Buffet proposti:</h2>
+                <ul>
+                    <li th:each="buffet : ${chef.buffets}">
+                        <a href="buffet.html" th:href="@{'/buffet/get/' + ${buffet.id}}"
+                        th:text="${buffet.nome} + ': ' + ${buffet.descrizione}">Buffet x: Evento 2021</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </body>

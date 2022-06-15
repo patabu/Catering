@@ -20,18 +20,15 @@
         <input type="hidden" th:field="*{id}"/>
         <input type="hidden" th:field="*{piatti}"/>
         <div>
-          <span>Nome:</span>
-          <span><input type="text" th:field="*{nome}"></span>
+          <span><input type="text" th:field="*{nome}" placeholder="Nome"></span>
           <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
         </div>
         <div>
-          <span>Origine:</span>
-          <span><input type="text" th:field="*{origine}"></span>
+          <span><input type="text" th:field="*{origine}" placeholder="Origine"></span>
           <span th:if="${#fields.hasErrors('origine')}" th:errors="*{origine}"></span>
         </div>
         <div>
-          <span>Descrizione:</span>
-          <span><input type="text" th:field="*{descrizione}"></span>
+          <span><input id="descrizione" type="text" th:field="*{descrizione}" placeholder="Descrizione"></span>
           <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
         <div>
           <span><button type="submit" th:if="${modifyForm}">Modifica</button></span>

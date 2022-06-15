@@ -9,12 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.model.Buffet;
+import com.spring.model.Piatto;
 import com.spring.repository.BuffetRepository;
+import com.spring.repository.PiattoRepository;
 
 @Service
 public class BuffetService {
 
 	@Autowired private BuffetRepository buffetRepository;
+	@Autowired private PiattoRepository piattoRepository;
 	
 	public Set<Buffet> getAllBuffets() {
 		Set<Buffet> buffets = new HashSet<Buffet>();
@@ -32,7 +35,15 @@ public class BuffetService {
 		return this.buffetRepository.findById(id).get();
 	}
 
+	@Transactional
 	public void deleteBuffetById(Long id) {
+		Buffet b = this.buffetRepository.findById(id).get();
+		for (Piatto p : this.piattoRepository.findAll()) {
+			if (b.getPiatti().contains(p)) {
+				p.removeBuffet(b);
+				this.piattoRepository.save(p);
+			}
+		}
 		this.buffetRepository.deleteById(id);
 	}
 

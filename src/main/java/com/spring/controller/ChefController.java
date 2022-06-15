@@ -58,7 +58,6 @@ public class ChefController {
 				model.addAttribute("modified", true);
 			this.chefService.saveChef(chef); //Salvo lo chef
 			model.addAttribute("chef", chef); //Aggiungo al template il model chef, con i dati inseriti inizialmente nella form
-			//model.addAttribute("admin", true);
 			this.credentialsService.setRoleInModel(model);
 			return "chef.html"; //Torno il template
 		}
@@ -75,10 +74,10 @@ public class ChefController {
 	public String getFormModifyChef(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("chef", this.chefService.getChefById(id));
 		model.addAttribute("modifyForm", true); 
-		return "chefForm.html";
+		return "chefForm.html";  
 	}
 	
-	@PostMapping("/admin/chef/delete/{id}")
+	@GetMapping("/admin/chef/delete/{id}")
 	public String deleteChefById(@PathVariable("id") Long id, Model model) {
 		this.chefService.deleteChefById(id);
 		model.addAttribute("chefs", this.chefService.getAllChefs());

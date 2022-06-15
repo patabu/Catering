@@ -11,36 +11,39 @@
     <header th:replace="fragments/base.html :: home">
         <a href="home.html" th:href="@{/home}"><img src="/static/images/home.png"></a>
     </header>
-    <h2 th:if="!${modified}">Dettagli sul piatto</h2>
-    <h2 th:if="${modified}">Piatto aggiornato</h2>
     <div class="detailsContainer" th:if="${piatto}">
-        <div class="basicDetails">
-            <p th:text="'Nome: ' + ${piatto.nome}">Carbonara</p>
-            <p th:text="'Descrizione: ' + ${piatto.descrizione}">con panna</p>
-            <p th:text="'Proposto dallo chef: ' + ${piatto.chef.nome} + ' ' + ${piatto.chef.cognome}"></p>
+        <div class="title">
+            <h2 th:if="!${modified}">Dettagli sul piatto</h2>
+            <h2 th:if="${modified}">Piatto aggiornato</h2>
+            <a th:if=${admin} href="piattoForm.html" th:href="@{'/admin/piatto/form/modify/' + ${piatto.id}}"><img src="/static/images/pencil.png" th:src="@{/images/pencil.png}"></a>
+            <a th:if=${admin} href="piatti.html" th:href="@{'/admin/piatto/delete/' + ${piatto.id}}"><img src="/static/images/delete.png" th:src="@{/images/delete.png}"></a>
         </div>
-        <div class="listDetails">
-            <h2>Utilizza i seguenti ingredienti <a th:if=${admin} href="ingredienteForm.html" th:href="@{'/admin/ingrediente/form/addToPiatto/p=' + ${piatto.id}}">(Gestisci)</a></h2>
-            <ul>
-                <li th:each="ingrediente : ${piatto.ingredienti}">
-                    <a href="ingrediente.html" th:href="@{'/ingrediente/get/' + ${ingrediente.id}}"
-                    th:text="${ingrediente.nome}">Sale</a>
-                </li>
-            </ul>
-            <h2>Proposto nei seguenti buffet</h2>
-            <ul>
-                <li th:each="buffet : ${piatto.buffets}">
-                    <a href="buffet.html" th:href="@{'/buffet/get/' + ${buffet.id}}"
-                    th:text="${buffet.nome} + ': ' + ${buffet.descrizione}">Buffet x: Evento 2021</a>
-                </li>
-            </ul>
+        <div class="content">
+            <div class="basic">
+                <p th:text="'Nome: ' + ${piatto.nome}">Nome: Carbonara</p>
+                <p th:text="'Descrizione: ' + ${piatto.descrizione}">Descrizione: con panna</p>
+                <p th:text="'Proposto dallo chef: ' + ${piatto.chef.nome} + ' ' + ${piatto.chef.cognome}">Proposto dallo chef: Davide Bucci</p>
+            </div>
+            <div class="list">
+                <div class="modify">
+                    <h2>Utilizza i seguenti ingredienti</h2>
+                    <a th:if=${admin} href="ingredienteForm.html" th:href="@{'/admin/ingrediente/form/addToPiatto/p=' + ${piatto.id}}"><img src="/static/images/pencil.png" th:src="@{/images/pencil.png}"></a>
+                </div>
+                <ul>
+                    <li th:each="ingrediente : ${piatto.ingredienti}">
+                        <a href="ingrediente.html" th:href="@{'/ingrediente/get/' + ${ingrediente.id}}"
+                        th:text="${ingrediente.nome}">Sale</a>
+                    </li>
+                </ul>
+                <h2>Proposto nei seguenti buffet</h2>
+                <ul>
+                    <li th:each="buffet : ${piatto.buffets}">
+                        <a href="buffet.html" th:href="@{'/buffet/get/' + ${buffet.id}}"
+                        th:text="${buffet.nome} + ': ' + ${buffet.descrizione}">Buffet x: Evento 2021</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-    <form th:if=${admin} th:action="@{'/admin/piatto/form/modify/' + ${piatto.id}}" method="get" th:object="${piatto}">
-        <p><button type="submit">Modifica</button></p>
-    </form>
-    <form th:if=${admin} th:action="@{'/admin/piatto/delete/' + ${piatto.id}}" method="post" th:object="${piatto}">
-        <p><button type="submit">Elimina</button></p>
-    </form>
 </body>
 </html>

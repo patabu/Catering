@@ -12,25 +12,22 @@
 			<h2>LOGIN</h2>
 			<div class="formAuth">
 				<div>
-					<span><input name="username" type="text" required placeholder="Username"/></span>
+					<span><input class="inputLogin" name="username" type="text" required placeholder="Username"/></span>
 				</div>
 				<div>
-					<span><input name="password" type="password" required placeholder="Password"/></span>
+					<span><input class="inputLogin" name="password" type="password" required placeholder="Password"/></span>
 				</div>
 				<div>
-					<span><button type="submit">LOGIN</button></span>
+					<span><button class="authButton" type="submit">LOGIN</button></span>
 					<p>or</p>
 				</div>
 			</div>
 		</form>
 		<form action="registerForm.html" th:action="@{/register}" method="get">
 			<div class="formAuth">
-				<button id="register" type="submit">REGISTER</button>
+				<button class="authButton" id="register" type="submit">REGISTER</button>
 			</div>
 		</form>
 	</div>
-	<footer th:replace="fragments/base.html :: end">
-		Gesu
-	</footer>
 </body> 
 </html>
