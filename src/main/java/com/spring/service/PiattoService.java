@@ -83,7 +83,7 @@ public class PiattoService {
 				// Se invece era già stato inserito => tutto okay
 			} else { // Se non è stato inserito (è stato deselezionato)
 				// Controllo sul piatto se tra i buffets, il buffet in questione era già stato inserito (if piatto.buffets.contains(buffet))
-				if (piatto.getBuffets().contains(buffet)) {
+				if (piatto.getBuffets().contains(buffet)) { 
 					/*
 					 * Nel caso in cui il piatto era stato già inserito, e lo deseleziono tra le checkbox, devo fare in modo di rimuovere la reference dalla lista
 					 */
